@@ -31,7 +31,8 @@ public class ItemListServlet extends HttpServlet {
             request.getSession().setAttribute("collectionItem", itemService.getAllSortNameASC());
             request.getRequestDispatcher("/WEB-INF/views/itemList.jsp").forward(request, response);
 
-        } else if (request.getParameter("sortDownName") != null) {
+        }
+ else if (request.getParameter("sortDownName") != null) {
 
             logger.info("Администратор нажал на кнопку \"Сортировка товара по имени по возрастанию\" на странице списка товара");
             request.getSession().setAttribute("collectionItem", itemService.getAllSortNameDESC());
@@ -54,7 +55,8 @@ public class ItemListServlet extends HttpServlet {
             logger.info("Администратор нажал на кнопку \"назад\" на странице списка товара");
             request.getRequestDispatcher("/WEB-INF/views/admin.jsp").forward(request, response);
 
-        } else {
+        }
+        else {
 
             if (request.getParameter("add") != null & !request.getParameter("newPrice").equals("") & !request.getParameter("newName").equals("")) {
 

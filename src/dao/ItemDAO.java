@@ -1,10 +1,7 @@
 package dao;
 
 import entity.Item;
-import entity.User;
 
-import java.math.BigDecimal;
-import java.sql.SQLException;
 import java.util.List;
 
 public  interface ItemDAO {
@@ -14,7 +11,7 @@ public  interface ItemDAO {
     void add(Item item);
 
     //read
-     List<Item> getAll();
+    List<Item> getAll();
 
     List<Item> getAllSortNameASC();
 

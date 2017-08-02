@@ -14,7 +14,7 @@ import java.util.List;
 public class UserService extends Util implements UserDAO {
 
 
-    Logger logger = Logger.getLogger(UserService.class);
+    private static final Logger logger = Logger.getLogger(UserService.class);
 
     @Override
     public void add(User user) {

@@ -54,7 +54,7 @@ public class MainServlet extends javax.servlet.http.HttpServlet {
             session.setAttribute("user", userService.getById(user.getId()));
             ArrayList<Item> userBin = new ArrayList<>();
             session.setAttribute("userBin", userBin);
-            session.setAttribute("counter", Bin.COUNTER);
+            session.setAttribute("counter", Bin.getCOUNTER());
             request.getRequestDispatcher("/WEB-INF/views/user.jsp").forward(request, response);
         }
     }

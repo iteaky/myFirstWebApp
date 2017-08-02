@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @WebServlet("/UserServlet")
@@ -24,6 +26,7 @@ public class UserServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+         
         String userName = (String) request.getSession().getAttribute("name");
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
@@ -32,11 +35,13 @@ public class UserServlet extends HttpServlet {
 
         if (request.getParameter("sortUpName") != null) {
 
+
             logger.info("Пользователь " + userName + "  нажал на кнопку \"Сортировка товара по имени по убыванию\" на странице списка товара");
             request.getSession().setAttribute("collectionItem", itemService.getAllSortNameASC());
             request.getRequestDispatcher("/WEB-INF/views/user.jsp").forward(request, response);
 
-        } else if (request.getParameter("sortDownName") != null) {
+        }
+        else if (request.getParameter("sortDownName") != null) {
 
             logger.info("Пользователь " + userName + "  нажал на кнопку \"Сортировка товара по имени по возрастанию\" на странице списка товара");
             request.getSession().setAttribute("collectionItem", itemService.getAllSortNameDESC());
@@ -61,8 +66,8 @@ public class UserServlet extends HttpServlet {
 
             logger.info("Пользователь " + userName + "  нажал на кнопку \"Выход\" на странице списка товара");
             request.getSession().invalidate();
-            Bin.COUNTER = 0;
-            Bin.PRICE = 0D;
+            Bin.setCOUNTER(0);
+            Bin.setPRICE(0D);
             Bin.getItems().clear();
             request.getRequestDispatcher("/main.jsp").forward(request, response);
 
@@ -79,10 +84,15 @@ public class UserServlet extends HttpServlet {
             String userId = request.getParameter("add");
             Item item = itemService.getById(Integer.parseInt(userId));
             userService.updateShopDate((String) request.getSession().getAttribute("name"));
+
             Bin.getItems().add(item);
-            Bin.PRICE += item.getPrice();
-            session.setAttribute("binPrice", Bin.PRICE);
-            session.setAttribute("counter", ++Bin.COUNTER);
+            Bin.setPRICE(0D);
+            for (Item i: Bin.getItems()){
+                Bin.setPRICE(Bin.getPRICE()+i.getPrice());
+            }
+            Bin.setCOUNTER(Bin.getCOUNTER()+1);
+            session.setAttribute("binPrice", Bin.getPRICE());
+            session.setAttribute("counter", Bin.getCOUNTER());
             session.setAttribute("userBin", Bin.getItems());
             request.getRequestDispatcher("/WEB-INF/views/user.jsp").forward(request, response);
             logger.info("Пользователь " + userName + "  добавил товар " + item.getName() + " в корзину");

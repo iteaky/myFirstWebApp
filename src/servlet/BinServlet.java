@@ -14,6 +14,7 @@ import java.io.IOException;
 
 @WebServlet("/BinServlet")
 public class BinServlet extends HttpServlet {
+   private final static  Logger logger = Logger.getLogger(BinServlet.class);
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -22,15 +23,15 @@ public class BinServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         String userName = (String) request.getSession().getAttribute("name");
-        Logger logger = Logger.getLogger(BinServlet.class);
+
 
         if (request.getParameter("exit") != null) {
 
             logger.info("Пользователь " + userName + " нажал на кнопку \"Выход\"");
             Bin.getItems().clear();
             request.getSession().invalidate();
-            Bin.COUNTER = 0;
-            Bin.PRICE = 0D;
+            Bin.setCOUNTER(0);
+            Bin.setPRICE(0D);
             request.getRequestDispatcher("/main.jsp").forward(request, response);
 
         }
@@ -44,12 +45,13 @@ public class BinServlet extends HttpServlet {
                 if (item.getName().equals(request.getParameter("delete"))) {
 
                     Bin.getItems().remove(item);
-                    Bin.PRICE -= item.getPrice();
+                    Bin.setPRICE(Bin.getPRICE()- item.getPrice());
+                    Bin.setCOUNTER(Bin.getCOUNTER()-1);
                     break;
                 }
             }
-            request.getSession().setAttribute("binPrice", Bin.PRICE);
-            request.getSession().setAttribute("counter", --Bin.COUNTER);
+            request.getSession().setAttribute("binPrice", Bin.getPRICE());
+            request.getSession().setAttribute("counter", Bin.getCOUNTER());
             request.getRequestDispatcher("/WEB-INF/views/bin.jsp").forward(request, response);
 
 
@@ -66,8 +68,8 @@ public class BinServlet extends HttpServlet {
             UserService userService = new UserService();
             userService.updatePaymentStatus((String) request.getSession().getAttribute("name"), true);
             Bin.getItems().clear();
-            Bin.COUNTER = 0;
-            Bin.PRICE = 0D;
+            Bin.setCOUNTER(0);
+            Bin.setPRICE(0D);
             request.getRequestDispatcher("/WEB-INF/views/goodbye.jsp").forward(request, response);
         }
     }

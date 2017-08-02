@@ -53,6 +53,7 @@ public class ItemService extends Util implements ItemDAO {
                 itemList.add(item);
 
             }
+            resultSet.close();
         } catch (SQLException e) {
             logger.error("Ошибка при получении списка всех товаров");
         } finally {
@@ -209,6 +210,9 @@ public class ItemService extends Util implements ItemDAO {
     }
 
 
+
+
+
     @Override
     public Item getById(int id) {
         Connection connection = getConnection();
@@ -223,6 +227,8 @@ public class ItemService extends Util implements ItemDAO {
                 item.setName(resultSet.getString("name"));
                 item.setPrice(resultSet.getDouble("price"));
             }
+            resultSet.close();
+
         } catch (SQLException e) {
             logger.error("Ошибка при получении экземпляра товара по индификатору.");
         } finally {

@@ -26,8 +26,7 @@ public class GoodbyeServlet extends HttpServlet {
         if (request.getParameter("items") != null) {
 
             logger.info("Пользователь " + userName + "  нажал на кнопку \"Купить еще \"");
-            request.getSession().setAttribute("counter", Bin.COUNTER);
-            request.getSession().setAttribute("binPrice", Bin.COUNTER);
+            request.getSession().setAttribute("counter", Bin.getCOUNTER());
             request.getRequestDispatcher("/WEB-INF/views/user.jsp").forward(request, response);
 
         }

@@ -49,6 +49,7 @@ public class Util {
 
     protected static void  closeConnection(Connection connection) {
             pool.add(connection);
+            connection=null;
     }
 
 

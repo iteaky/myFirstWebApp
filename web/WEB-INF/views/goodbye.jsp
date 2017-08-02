@@ -14,6 +14,7 @@
 <form action="/GoodbyeServlet">
 
     <body bgcolor="#a9a9a9">
+    <div style="height: 300px"></div>
     <br>
     <br>
     <br>
