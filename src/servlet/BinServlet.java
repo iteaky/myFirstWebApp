@@ -25,23 +25,26 @@ public class BinServlet extends HttpServlet {
         Logger logger = Logger.getLogger(BinServlet.class);
 
         if (request.getParameter("exit") != null) {
+
             logger.info("Пользователь " + userName + " нажал на кнопку \"Выход\"");
             Bin.getItems().clear();
             request.getSession().invalidate();
             Bin.COUNTER = 0;
-            Bin.PRICE = 0;
+            Bin.PRICE = 0D;
             request.getRequestDispatcher("/main.jsp").forward(request, response);
 
         }
 
         if (request.getParameter("delete") != null) {
+
             logger.info("Пользователь " + userName + " удаляет товар из корзины");
 
             for (Item item : Bin.getItems()) {
+
                 if (item.getName().equals(request.getParameter("delete"))) {
+
                     Bin.getItems().remove(item);
                     Bin.PRICE -= item.getPrice();
-
                     break;
                 }
             }
@@ -53,18 +56,18 @@ public class BinServlet extends HttpServlet {
         }
 
         if (request.getParameter("back") != null) {
-            logger.info("Пользователь " + userName + "  нажал на кнопку \"Назад\" (из корзины к списку товаров)");
 
+            logger.info("Пользователь " + userName + "  нажал на кнопку \"Назад\" (из корзины к списку товаров)");
             request.getRequestDispatcher("/WEB-INF/views/user.jsp").forward(request, response);
         }
         if (request.getParameter("bin") != null) {
-            logger.info("Пользователь " + userName + "  нажал на кнопку \"Оплатить товар\"");
 
+            logger.info("Пользователь " + userName + "  нажал на кнопку \"Оплатить товар\"");
             UserService userService = new UserService();
             userService.updatePaymentStatus((String) request.getSession().getAttribute("name"), true);
             Bin.getItems().clear();
             Bin.COUNTER = 0;
-            Bin.PRICE = 0;
+            Bin.PRICE = 0D;
             request.getRequestDispatcher("/WEB-INF/views/goodbye.jsp").forward(request, response);
         }
     }

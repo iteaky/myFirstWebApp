@@ -34,7 +34,7 @@
         <c:forEach var="item" items="${userBin}">
             <tr align="center">
                 <td align="center">${item.name}</td>
-                <td align="center">${item.price}</td>
+                <td align="center">${item.price} &#8381</td>
                 <td align="center">
                     <button value="${item.name}" name="delete">удалить</button>
                 </td>
@@ -42,7 +42,7 @@
         </c:forEach>
         <tr align="center">
             <td bgcolor="#fff8dc"><h3>Количество товаров: ${counter}</h3></td>
-            <td bgcolor="#fff8dc"><h3>Общая стоимость: ${binPrice}</h3></td>
+            <td bgcolor="#fff8dc"><h3>Общая стоимость: ${binPrice} &#8381</h3></td>
             <td bgcolor="#556b2f">
                 <button value="bin" name="bin">Оплатить</button>
             </td>

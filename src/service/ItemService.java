@@ -3,28 +3,25 @@ package service;
 import businessLogic.Util;
 import dao.ItemDAO;
 import entity.Item;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import entity.User;
-import org.apache.log4j.Logger;
 
 public class ItemService extends Util implements ItemDAO {
 
     private Logger logger = Logger.getLogger(ItemService.class);
 
 
-
     @Override
-    public  void add(Item item) {
+    public void add(Item item) {
         Connection connection = getConnection();
         String sql = "INSERT INTO eshop.item (name,price) VALUES (?,?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql);) {
             preparedStatement.setString(1, item.getName());
-            preparedStatement.setInt(2, item.getPrice());
+            preparedStatement.setDouble(2, item.getPrice());
             preparedStatement.execute();
 
         } catch (SQLException e) {
@@ -51,7 +48,7 @@ public class ItemService extends Util implements ItemDAO {
             while (resultSet.next()) {
                 Item item = new Item();
                 item.setName(resultSet.getString("name"));
-                item.setPrice(resultSet.getInt("price"));
+                item.setPrice(resultSet.getDouble("price"));
                 item.setId(resultSet.getLong("id"));
                 itemList.add(item);
 
@@ -86,7 +83,7 @@ public class ItemService extends Util implements ItemDAO {
             while (resultSet.next()) {
                 Item item = new Item();
                 item.setName(resultSet.getString("name"));
-                item.setPrice(resultSet.getInt("price"));
+                item.setPrice(resultSet.getDouble("price"));
                 item.setId(resultSet.getLong("id"));
                 itemList.add(item);
 
@@ -121,7 +118,7 @@ public class ItemService extends Util implements ItemDAO {
             while (resultSet.next()) {
                 Item item = new Item();
                 item.setName(resultSet.getString("name"));
-                item.setPrice(resultSet.getInt("price"));
+                item.setPrice(resultSet.getDouble("price"));
                 item.setId(resultSet.getLong("id"));
                 itemList.add(item);
 
@@ -156,7 +153,7 @@ public class ItemService extends Util implements ItemDAO {
             while (resultSet.next()) {
                 Item item = new Item();
                 item.setName(resultSet.getString("name"));
-                item.setPrice(resultSet.getInt("price"));
+                item.setPrice(resultSet.getDouble("price"));
                 item.setId(resultSet.getLong("id"));
                 itemList.add(item);
 
@@ -191,7 +188,7 @@ public class ItemService extends Util implements ItemDAO {
             while (resultSet.next()) {
                 Item item = new Item();
                 item.setName(resultSet.getString("name"));
-                item.setPrice(resultSet.getInt("price"));
+                item.setPrice(resultSet.getDouble("price"));
                 item.setId(resultSet.getLong("id"));
                 itemList.add(item);
 
@@ -224,7 +221,7 @@ public class ItemService extends Util implements ItemDAO {
             while (resultSet.next()) {
                 item.setId(resultSet.getLong("id"));
                 item.setName(resultSet.getString("name"));
-                item.setPrice(resultSet.getInt("price"));
+                item.setPrice(resultSet.getDouble("price"));
             }
         } catch (SQLException e) {
             logger.error("Ошибка при получении экземпляра товара по индификатору.");
@@ -237,33 +234,50 @@ public class ItemService extends Util implements ItemDAO {
     }
 
     @Override
-    public void update(int id, String name, int price) {
+    public void update(int id, String name, Double price) {
         Connection connection = getConnection();
 
-        if (price == 0 & !name.equals("") || price != 0 & !name.equals("")) {
+        if (price != null & !name.equals("") || price != null & !name.equals("")) {
+
             String sql = "UPDATE item SET name = ? WHERE id = ?";
+
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
                 preparedStatement.setString(1, name);
-                preparedStatement.setInt(2, id);
+                preparedStatement.setLong(2, id);
                 preparedStatement.executeUpdate();
+
             } catch (SQLException e) {
+
                 logger.error("Ошибка при обновлении имени товара администратором");
+
             } finally {
+
                 if (connection != null) {
+
                     closeConnection(connection);
+
                 }
             }
-        } else if (name.equals("") & price != 0 || price != 0 & !name.equals("")) {
+        } else if (name.equals("") & price != null || price != null & !name.equals("")) {
+
             String sql = "UPDATE item SET price = ? WHERE id=?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                preparedStatement.setInt(1, price);
-                preparedStatement.setInt(2, id);
+
+                preparedStatement.setDouble(1, price);
+                preparedStatement.setLong(2, id);
                 preparedStatement.executeUpdate();
+
             } catch (SQLException e) {
+
                 logger.error("Ошибка при обновлении имени товара администратором");
+
             } finally {
+
                 if (connection != null) {
+
                     closeConnection(connection);
+
                 }
             }
         }
@@ -272,15 +286,18 @@ public class ItemService extends Util implements ItemDAO {
     @Override
     public void remove(int id) {
         Connection connection = getConnection();
-
         String sql = "DELETE FROM item WHERE id = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, id);
+            preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
+
         } catch (SQLException e) {
+
             logger.error("Ошибка при удалении товара из общего списка администратором.");
+
         } finally {
+
             if (connection != null) {
                 closeConnection(connection);
             }

@@ -3,6 +3,7 @@ package dao;
 import entity.Item;
 import entity.User;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public  interface ItemDAO {
 
 
     //update
-    void update(int id, String name, int price);
+    void update(int id, String name, Double price);
 
     //delete
     void remove(int id);

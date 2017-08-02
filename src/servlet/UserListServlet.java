@@ -28,32 +28,30 @@ public class UserListServlet extends HttpServlet {
 
 
         if (request.getParameter("sortUp") != null) {
-            logger.info("Администратор нажал на кнопку \"Сортировка пользвателей по имени по убыванию\" на странице списка пользователей");
 
+            logger.info("Администратор нажал на кнопку \"Сортировка пользвателей по имени по убыванию\" на странице списка пользователей");
             request.getSession().setAttribute("collectionUser", userService.getAllSortASC());
             request.getRequestDispatcher("/WEB-INF/views/userList.jsp").forward(request, response);
 
-
         } else if (request.getParameter("sortDown") != null) {
-            logger.info("Администратор нажал на кнопку \"Сортировка пользвателей по имени по возрастанию\" на странице списка пользователей");
 
+            logger.info("Администратор нажал на кнопку \"Сортировка пользвателей по имени по возрастанию\" на странице списка пользователей");
             request.getSession().setAttribute("collectionUser", userService.getAllSortDESC());
             request.getRequestDispatcher("/WEB-INF/views/userList.jsp").forward(request, response);
 
         }
         if (request.getParameter("back") != null) {
-            logger.info("Администратор нажал на кнопку \"Назад\" на странице списка пользователей");
 
+            logger.info("Администратор нажал на кнопку \"Назад\" на странице списка пользователей");
             request.getRequestDispatcher("/WEB-INF/views/admin.jsp").forward(request, response);
 
         } else {
+
             int userId = Integer.parseInt(request.getParameter("block"));
             logger.info("Администратор нажал на кнопку \"Блокировка пользователя\" на странице списка пользователей");
             userService.block(userId, userService.getById(userId).getIsBlocked());
             request.setAttribute("collectionUser", userService.getAll());
             request.getRequestDispatcher("/WEB-INF/views/userList.jsp").forward(request, response);
-
-
         }
     }
 }
