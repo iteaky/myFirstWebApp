@@ -1,6 +1,5 @@
 package servlet;
 
-import entity.User;
 import org.apache.log4j.Logger;
 import service.UserService;
 
@@ -10,11 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 
 @WebServlet("/UserListServlet")
 public class UserListServlet extends HttpServlet {
@@ -25,6 +19,7 @@ public class UserListServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         Logger logger = Logger.getLogger(UserListServlet.class);
 
         request.setCharacterEncoding("UTF-8");

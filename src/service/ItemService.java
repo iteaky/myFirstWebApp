@@ -8,11 +8,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import entity.User;
 import org.apache.log4j.Logger;
 
 public class ItemService extends Util implements ItemDAO {
 
     private Logger logger = Logger.getLogger(ItemService.class);
+
 
 
     @Override

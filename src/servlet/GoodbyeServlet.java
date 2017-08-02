@@ -17,9 +17,13 @@ public class GoodbyeServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        String userName = (String) request.getSession().getAttribute("name");
         Logger logger = Logger.getLogger(GoodbyeServlet.class);
         if (request.getParameter("items") != null) {
-            logger.info("Пользователь нажал на кнопку \"Купить еще \"");
+            logger.info("Пользователь " + userName + "  нажал на кнопку \"Купить еще \"");
 
             request.getSession().setAttribute("counter", Bin.COUNTER);
             request.getSession().setAttribute("binPrice", Bin.COUNTER);
@@ -28,7 +32,7 @@ public class GoodbyeServlet extends HttpServlet {
         }
 
         if (request.getParameter("exit") != null) {
-            logger.info("Пользователь нажал на кнопку \"Выход\"");
+            logger.info("Пользователь " + userName + "  нажал на кнопку \"Выход\"");
             Bin.getItems().clear();
             request.getSession().invalidate();
             request.getRequestDispatcher("/main.jsp").forward(request, response);

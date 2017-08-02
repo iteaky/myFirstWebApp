@@ -19,6 +19,7 @@ public class MainServlet extends javax.servlet.http.HttpServlet {
     }
 
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+
         Logger logger = Logger.getLogger(MainServlet.class);
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
@@ -35,16 +36,16 @@ public class MainServlet extends javax.servlet.http.HttpServlet {
             request.getRequestDispatcher("/WEB-INF/views/admin.jsp").forward(request, response);
         } else {
             if (user.getIsBlocked()) {
-                logger.info("введено имя заблокированного позьзователя");
+                logger.info("введено имя " + request.getParameter("user") + "  -заблокированный позьзователь");
                 request.getRequestDispatcher("/WEB-INF/views/block.jsp").forward(request, response);
             } else if (userName.equals("new")) {
-                logger.info("Введено имя пользователя, который еще не заходил в магазин");
+                logger.info("Введено имя пользователя  " + request.getParameter("user") + " , который еще не заходил в магазин");
 
                 user = new User(request.getParameter("user"));
                 userService.add(user);
             }
 
-            logger.info("произведен вход за покупателя уже посещавшего магазин.");
+            logger.info("произведен вход за покупателя " + request.getParameter("user") + "  уже посещавшего магазин.");
 
             ItemService itemService = new ItemService();
             session.setAttribute("collectionItem", itemService.getAll());

@@ -1,6 +1,7 @@
 package servlet;
 
 import entity.Bin;
+import org.apache.log4j.Logger;
 import service.ItemService;
 import service.UserService;
 
@@ -10,8 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
-import org.apache.log4j.Logger;
 
 @WebServlet("/adminPage")
 public class AdminServlet extends HttpServlet {
@@ -23,6 +22,8 @@ public class AdminServlet extends HttpServlet {
         Logger logger = Logger.getLogger(AdminServlet.class);
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
+
+
         String redirect = null;
         if (request.getParameter("user") != null) {
             logger.info("Администратор нажал на кнопку \"Список Пользователей\"");
