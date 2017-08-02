@@ -3,7 +3,6 @@ package servlet;
 import entity.Item;
 import org.apache.log4j.Logger;
 import service.ItemService;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +12,8 @@ import java.io.IOException;
 
 @WebServlet("/ItemListServlet")
 public class ItemListServlet extends HttpServlet {
+    private final static Logger logger = Logger.getLogger(ItemListServlet.class);
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -20,7 +21,6 @@ public class ItemListServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Logger logger = Logger.getLogger(ItemListServlet.class);
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         ItemService itemService = new ItemService();
@@ -35,7 +35,7 @@ public class ItemListServlet extends HttpServlet {
  else if (request.getParameter("sortDownName") != null) {
 
             logger.info("Администратор нажал на кнопку \"Сортировка товара по имени по возрастанию\" на странице списка товара");
-            request.getSession().setAttribute("collectionItem", itemService.getAllSortNameDESC());
+           request.getSession().setAttribute("collectionItem", itemService.getAllSortNameDESC());
             request.getRequestDispatcher("/WEB-INF/views/itemList.jsp").forward(request, response);
 
         } else if (request.getParameter("sortUpPrice") != null) {

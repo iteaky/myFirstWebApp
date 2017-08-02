@@ -12,6 +12,9 @@ import java.io.IOException;
 
 @WebServlet("/GoodbyeServlet")
 public class GoodbyeServlet extends HttpServlet {
+
+    private final static Logger logger = Logger.getLogger(GoodbyeServlet.class);
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -21,7 +24,6 @@ public class GoodbyeServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         String userName = (String) request.getSession().getAttribute("name");
-        Logger logger = Logger.getLogger(GoodbyeServlet.class);
 
         if (request.getParameter("items") != null) {
 

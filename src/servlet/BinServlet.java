@@ -14,7 +14,9 @@ import java.io.IOException;
 
 @WebServlet("/BinServlet")
 public class BinServlet extends HttpServlet {
+
    private final static  Logger logger = Logger.getLogger(BinServlet.class);
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }

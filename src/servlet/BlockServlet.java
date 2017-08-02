@@ -12,6 +12,8 @@ import java.io.IOException;
 
 @WebServlet("/BlockServlet")
 public class BlockServlet extends HttpServlet {
+    private static final Logger logger = Logger.getLogger(BlockServlet.class);
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -21,7 +23,6 @@ public class BlockServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         String userName = (String) request.getSession().getAttribute("name");
-        Logger logger = Logger.getLogger(BlockServlet.class);
         logger.info("Заблокированный пользователь " + userName + "  нажал на кнопку \"Выход\"");
         Bin.getItems().clear();
         request.getSession().invalidate();

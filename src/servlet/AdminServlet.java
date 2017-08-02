@@ -14,12 +14,14 @@ import java.io.IOException;
 
 @WebServlet("/adminPage")
 public class AdminServlet extends HttpServlet {
+
+    private static final Logger logger = Logger.getLogger(AdminServlet.class);
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Logger logger = Logger.getLogger(AdminServlet.class);
         String redirect = null;
 
         if (request.getParameter("user") != null) {

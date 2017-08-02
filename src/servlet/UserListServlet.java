@@ -13,6 +13,8 @@ import java.io.IOException;
 @WebServlet("/UserListServlet")
 public class UserListServlet extends HttpServlet {
 
+    private final static Logger logger = Logger.getLogger(UserListServlet.class);
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -20,7 +22,6 @@ public class UserListServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Logger logger = Logger.getLogger(UserListServlet.class);
 
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");

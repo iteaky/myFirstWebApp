@@ -12,19 +12,7 @@
 </head>
 <body bgcolor="#cd5c5c">
 <form action="/BlockServlet">
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    <div style="height: 25%"></div>
     <h1 align="center"> Вы заблокированы! Обратитесь к администратору.</h1>
     <table align="center">
         <tr align="center">

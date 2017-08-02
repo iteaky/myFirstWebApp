@@ -12,8 +12,9 @@
 </head>
 <body bgcolor="#a9a9a9">
 <form action="/adminPage">
-    <br><br><br><br><br><br><br><br><br><br><br>
-    <h1 align="center" p>Вы администратор!</h1>
+    <div style="height: 25%"></div>
+
+    <h1 align="center" >Вы администратор!</h1>
     <table align="center">
         <td>
             <button value="user" name="user">клиенты</button>

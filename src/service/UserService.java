@@ -1,9 +1,9 @@
 package service;
 
-import businessLogic.Util;
 import dao.UserDAO;
 import entity.User;
 import org.apache.log4j.Logger;
+import util.ConnectionUtil;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserService extends Util implements UserDAO {
+public class UserService extends ConnectionUtil implements UserDAO {
 
 
     private static final Logger logger = Logger.getLogger(UserService.class);

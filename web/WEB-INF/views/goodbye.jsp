@@ -14,17 +14,8 @@
 <form action="/GoodbyeServlet">
 
     <body bgcolor="#a9a9a9">
-    <div style="height: 300px"></div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    <div style="height: 25%"></div>
+
     <h1 align="center">Мы начали собирать ваш заказ, до свидания!</h1>
 
     <table align="center">

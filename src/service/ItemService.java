@@ -1,15 +1,15 @@
 package service;
 
-import businessLogic.Util;
 import dao.ItemDAO;
 import entity.Item;
 import org.apache.log4j.Logger;
+import util.ConnectionUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemService extends Util implements ItemDAO {
+public class ItemService extends ConnectionUtil implements ItemDAO {
 
     private Logger logger = Logger.getLogger(ItemService.class);
 

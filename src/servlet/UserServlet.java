@@ -13,24 +13,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 
 @WebServlet("/UserServlet")
 public class UserServlet extends HttpServlet {
 
+    private final static Logger logger = Logger.getLogger(UserServlet.class);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-         
+
         String userName = (String) request.getSession().getAttribute("name");
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-        Logger logger = Logger.getLogger(UserServlet.class);
         ItemService itemService = new ItemService();
 
         if (request.getParameter("sortUpName") != null) {

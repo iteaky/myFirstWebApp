@@ -1,11 +1,10 @@
-package businessLogic;
+package util;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Properties;
 
 
-public class Util {
+public class ConnectionUtil {
     //драйвер
 
 
