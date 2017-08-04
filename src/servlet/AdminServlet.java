@@ -43,7 +43,6 @@ public class AdminServlet extends HttpServlet {
 
             logger.info("Администратор нажал на кнопку \"Выход\"");
 
-            Bin.getItems().clear();
             request.getSession().invalidate();
             redirect = "/main.jsp";
 

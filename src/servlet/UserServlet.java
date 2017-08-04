@@ -31,6 +31,7 @@ public class UserServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         ItemService itemService = new ItemService();
+        Bin bin = (Bin) request.getSession().getAttribute("bin");
 
         if (request.getParameter("sortUpName") != null) {
 
@@ -65,9 +66,12 @@ public class UserServlet extends HttpServlet {
 
             logger.info("Пользователь " + userName + "  нажал на кнопку \"Выход\" на странице списка товара");
             request.getSession().invalidate();
-            Bin.setCOUNTER(0);
-            Bin.setPRICE(0D);
-            Bin.getItems().clear();
+            bin.setCounter(0);
+            bin.setPrice(0D);
+            request.getSession().setAttribute("counter",0);
+            request.getSession().setAttribute("binPrice", 0);
+            bin.getItems().clear();
+            request.getSession().setAttribute("bin",bin);
             request.getRequestDispatcher("/main.jsp").forward(request, response);
 
         } else if (request.getParameter("bin") != null) {
@@ -84,15 +88,15 @@ public class UserServlet extends HttpServlet {
             Item item = itemService.getById(Integer.parseInt(userId));
             userService.updateShopDate((String) request.getSession().getAttribute("name"));
 
-            Bin.getItems().add(item);
-            Bin.setPRICE(0D);
-            for (Item i: Bin.getItems()){
-                Bin.setPRICE(Bin.getPRICE()+i.getPrice());
+            bin.getItems().add(item);
+            bin.setPrice(0D);
+            for (Item i: bin.getItems()){
+                bin.setPrice(bin.getPrice()+i.getPrice());
             }
-            Bin.setCOUNTER(Bin.getCOUNTER()+1);
-            session.setAttribute("binPrice", Bin.getPRICE());
-            session.setAttribute("counter", Bin.getCOUNTER());
-            session.setAttribute("userBin", Bin.getItems());
+            bin.setCounter(bin.getCounter()+1);
+            session.setAttribute("binPrice", bin.getPrice());
+            session.setAttribute("counter", bin.getCounter());
+            session.setAttribute("userBin", bin.getItems());
             request.getRequestDispatcher("/WEB-INF/views/user.jsp").forward(request, response);
             logger.info("Пользователь " + userName + "  добавил товар " + item.getName() + " в корзину");
         }

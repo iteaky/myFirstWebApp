@@ -24,11 +24,11 @@ public class GoodbyeServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         String userName = (String) request.getSession().getAttribute("name");
+        Bin bin = (Bin) request.getSession().getAttribute("bin");
 
         if (request.getParameter("items") != null) {
 
             logger.info("Пользователь " + userName + "  нажал на кнопку \"Купить еще \"");
-            request.getSession().setAttribute("counter", Bin.getCOUNTER());
             request.getRequestDispatcher("/WEB-INF/views/user.jsp").forward(request, response);
 
         }
@@ -36,7 +36,7 @@ public class GoodbyeServlet extends HttpServlet {
         if (request.getParameter("exit") != null) {
 
             logger.info("Пользователь " + userName + "  нажал на кнопку \"Выход\"");
-            Bin.getItems().clear();
+
             request.getSession().invalidate();
             request.getRequestDispatcher("/main.jsp").forward(request, response);
 

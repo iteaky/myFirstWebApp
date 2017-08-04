@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet("/welcomePage")
 public class MainServlet extends javax.servlet.http.HttpServlet {
@@ -55,9 +56,10 @@ public class MainServlet extends javax.servlet.http.HttpServlet {
             session.setAttribute("collectionItem", itemService.getAll());
             session.setAttribute("name", request.getParameter("user"));
             session.setAttribute("user", userService.getById(user.getId()));
-            ArrayList<Item> userBin = new ArrayList<>();
-            session.setAttribute("userBin", userBin);
-            session.setAttribute("counter", Bin.getCOUNTER());
+            Bin bin = new Bin();
+            bin.setPrice(0D);
+            bin.setCounter(0);
+            session.setAttribute("bin",bin);
             request.getRequestDispatcher("/WEB-INF/views/user.jsp").forward(request, response);
         }
     }

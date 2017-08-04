@@ -25,15 +25,19 @@ public class BinServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         String userName = (String) request.getSession().getAttribute("name");
+        Bin bin = (Bin) request.getSession().getAttribute("bin");
 
 
         if (request.getParameter("exit") != null) {
 
             logger.info("Пользователь " + userName + " нажал на кнопку \"Выход\"");
-            Bin.getItems().clear();
             request.getSession().invalidate();
-            Bin.setCOUNTER(0);
-            Bin.setPRICE(0D);
+            bin.getItems().clear();
+            bin.setCounter(0);
+            bin.setPrice(0D);
+            request.getSession().setAttribute("counter",0);
+            request.getSession().setAttribute("binPrice", 0);
+            request.getSession().setAttribute("bin", bin);
             request.getRequestDispatcher("/main.jsp").forward(request, response);
 
         }
@@ -42,18 +46,21 @@ public class BinServlet extends HttpServlet {
 
             logger.info("Пользователь " + userName + " удаляет товар из корзины");
 
-            for (Item item : Bin.getItems()) {
+            for (Item item : bin.getItems()) {
 
                 if (item.getName().equals(request.getParameter("delete"))) {
 
-                    Bin.getItems().remove(item);
-                    Bin.setPRICE(Bin.getPRICE()- item.getPrice());
-                    Bin.setCOUNTER(Bin.getCOUNTER()-1);
+                    bin.getItems().remove(item);
+                    bin.setPrice(bin.getPrice()- item.getPrice());
+                    bin.setCounter(bin.getCounter()-1);
+
                     break;
                 }
             }
-            request.getSession().setAttribute("binPrice", Bin.getPRICE());
-            request.getSession().setAttribute("counter", Bin.getCOUNTER());
+            request.getSession().setAttribute("binPrice", bin.getPrice());
+            request.getSession().setAttribute("counter", bin.getCounter());
+            request.getSession().setAttribute("bin", bin);
+
             request.getRequestDispatcher("/WEB-INF/views/bin.jsp").forward(request, response);
 
 
@@ -69,9 +76,12 @@ public class BinServlet extends HttpServlet {
             logger.info("Пользователь " + userName + "  нажал на кнопку \"Оплатить товар\"");
             UserService userService = new UserService();
             userService.updatePaymentStatus((String) request.getSession().getAttribute("name"), true);
-            Bin.getItems().clear();
-            Bin.setCOUNTER(0);
-            Bin.setPRICE(0D);
+            bin.getItems().clear();
+            bin.setCounter(0);
+            bin.setPrice(0D);
+            request.getSession().setAttribute("counter",0);
+            request.getSession().setAttribute("binPrice", 0);
+            request.getSession().setAttribute("bin", bin);
             request.getRequestDispatcher("/WEB-INF/views/goodbye.jsp").forward(request, response);
         }
     }

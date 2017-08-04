@@ -24,7 +24,6 @@ public class BlockServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         String userName = (String) request.getSession().getAttribute("name");
         logger.info("Заблокированный пользователь " + userName + "  нажал на кнопку \"Выход\"");
-        Bin.getItems().clear();
         request.getSession().invalidate();
         request.getRequestDispatcher("/main.jsp").forward(request, response);
 
