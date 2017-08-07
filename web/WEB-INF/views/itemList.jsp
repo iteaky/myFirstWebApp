@@ -11,13 +11,13 @@
 <head>
     <title>Items</title>
 </head>
-<body>
+<body >
 <form action="/ItemListServlet">
 
 
-    <table width="100%" border="1" bgcolor="#a9a9a9">
+    <table width="100%" border="1" bgcolor="#a9a9a9" style="border-radius: 5px">
 
-        <td align="center" bgcolor="#fff8dc">Наименование
+        <td  align="center" bgcolor="#fff8dc">Наименование
             <button style="align-self: flex-end;" value="sortDownName" name="sortDownName">&darr;</button>
             <button style="align-self: flex-end;" value="sortUpName" name="sortUpName">&uarr;</button>
         </td>
@@ -25,9 +25,9 @@
             <button style="align-self: flex-end;" value="sortDownPrice" name="sortDownPrice">&darr;</button>
             <button style="align-self: flex-end;" value="sortUpPrice" name="sortUpPrice">&uarr;</button>
         </td>
-        <td align="center" bgcolor="#fff8dc">новое название</td>
+        <td  align="center" bgcolor="#fff8dc">новое название</td>
         <td align="center" bgcolor="#fff8dc">новая цена</td>
-        <td align="center" bgcolor="#fff8dc"></td>
+        <td  align="center" bgcolor="#fff8dc"></td>
         <td align="center" bgcolor="#8b0000">
             <button value="back" name="back">Назад</button>
         </td>

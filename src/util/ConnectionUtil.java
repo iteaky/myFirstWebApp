@@ -1,10 +1,16 @@
 package util;
 
+import org.apache.log4j.Logger;
+
 import java.sql.*;
 import java.util.ArrayList;
 
 
 public class ConnectionUtil {
+ private final static   Logger logger = Logger.getLogger(ConnectionUtil.class);
+
+
+
     //драйвер
 
 
@@ -22,7 +28,7 @@ public class ConnectionUtil {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
             } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+                logger.error("Драйвер не найден");
             }
 
 
@@ -31,7 +37,7 @@ public class ConnectionUtil {
                 try {
                     pool.add(DriverManager.getConnection(URL,USERNAME,PASSWORD));
                 } catch (SQLException e) {
-                    e.printStackTrace();
+                    logger.error("Отсутствует поделючение к базе данных");
                 }
 
             }

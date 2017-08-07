@@ -1,6 +1,7 @@
 package dao;
 
 import entity.Item;
+import entity.User;
 
 import java.util.List;
 
@@ -20,6 +21,8 @@ public  interface ItemDAO {
     List<Item> getAllSortPriceASC();
 
     List<Item> getAllSortPriceDESC();
+
+
 
     Item getById(int id);
 

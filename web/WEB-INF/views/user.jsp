@@ -44,7 +44,7 @@
                 </h2>
             </td>
             <td bgcolor="#556b2f">
-                <button value="bin" name="bin">Посмотреть список покупок</button>
+                <button value="cart" name="cart">Посмотреть список покупок</button>
             </td>
 
         </tr>

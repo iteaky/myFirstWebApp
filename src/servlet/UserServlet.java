@@ -1,6 +1,6 @@
 package servlet;
 
-import entity.Bin;
+import entity.UserCart;
 import entity.Item;
 import org.apache.log4j.Logger;
 import service.ItemService;
@@ -31,7 +31,7 @@ public class UserServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         ItemService itemService = new ItemService();
-        Bin bin = (Bin) request.getSession().getAttribute("bin");
+        UserCart cart = (UserCart) request.getSession().getAttribute("cart");
 
         if (request.getParameter("sortUpName") != null) {
 
@@ -66,18 +66,18 @@ public class UserServlet extends HttpServlet {
 
             logger.info("Пользователь " + userName + "  нажал на кнопку \"Выход\" на странице списка товара");
             request.getSession().invalidate();
-            bin.setCounter(0);
-            bin.setPrice(0D);
+            cart.setCounter(0);
+            cart.setPrice(0D);
             request.getSession().setAttribute("counter",0);
-            request.getSession().setAttribute("binPrice", 0);
-            bin.getItems().clear();
-            request.getSession().setAttribute("bin",bin);
+            request.getSession().setAttribute("cartPrice", 0);
+            cart.getItems().clear();
+            request.getSession().setAttribute("cart",cart);
             request.getRequestDispatcher("/main.jsp").forward(request, response);
 
-        } else if (request.getParameter("bin") != null) {
+        } else if (request.getParameter("cart") != null) {
 
             logger.info("Пользователь " + userName + "  нажал на кнопку  \"перейти в корзину\" на странице списка товара");
-            request.getRequestDispatcher("/WEB-INF/views/bin.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/userCart.jsp").forward(request, response);
 
         } else if (request.getParameter("add") != null) {
 
@@ -88,15 +88,15 @@ public class UserServlet extends HttpServlet {
             Item item = itemService.getById(Integer.parseInt(userId));
             userService.updateShopDate((String) request.getSession().getAttribute("name"));
 
-            bin.getItems().add(item);
-            bin.setPrice(0D);
-            for (Item i: bin.getItems()){
-                bin.setPrice(bin.getPrice()+i.getPrice());
+            cart.getItems().add(item);
+            cart.setPrice(0D);
+            for (Item i: cart.getItems()){
+                cart.setPrice(cart.getPrice()+i.getPrice());
             }
-            bin.setCounter(bin.getCounter()+1);
-            session.setAttribute("binPrice", bin.getPrice());
-            session.setAttribute("counter", bin.getCounter());
-            session.setAttribute("userBin", bin.getItems());
+            cart.setCounter(cart.getCounter()+1);
+            session.setAttribute("cartPrice", cart.getPrice());
+            session.setAttribute("counter", cart.getCounter());
+            session.setAttribute("cart", cart);
             request.getRequestDispatcher("/WEB-INF/views/user.jsp").forward(request, response);
             logger.info("Пользователь " + userName + "  добавил товар " + item.getName() + " в корзину");
         }

@@ -1,6 +1,5 @@
 package servlet;
 
-import entity.Bin;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -24,7 +23,6 @@ public class GoodbyeServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
         String userName = (String) request.getSession().getAttribute("name");
-        Bin bin = (Bin) request.getSession().getAttribute("bin");
 
         if (request.getParameter("items") != null) {
 

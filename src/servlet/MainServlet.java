@@ -1,7 +1,6 @@
 package servlet;
 
-import entity.Bin;
-import entity.Item;
+import entity.UserCart;
 import entity.User;
 import org.apache.log4j.Logger;
 import service.ItemService;
@@ -10,8 +9,6 @@ import service.UserService;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @WebServlet("/welcomePage")
 public class MainServlet extends javax.servlet.http.HttpServlet {
@@ -56,19 +53,12 @@ public class MainServlet extends javax.servlet.http.HttpServlet {
             session.setAttribute("collectionItem", itemService.getAll());
             session.setAttribute("name", request.getParameter("user"));
             session.setAttribute("user", userService.getById(user.getId()));
-            Bin bin = new Bin();
-            bin.setPrice(0D);
-            bin.setCounter(0);
-            session.setAttribute("bin",bin);
+            UserCart cart = new UserCart();
+            cart.setPrice(0D);
+            cart.setCounter(0);
+            session.setAttribute("cart",cart);
             request.getRequestDispatcher("/WEB-INF/views/user.jsp").forward(request, response);
         }
     }
 }
-
-
-
-
-
-
-
 

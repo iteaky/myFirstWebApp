@@ -12,7 +12,7 @@
     <title>Корзина</title>
 </head>
 <body>
-<form action="/BinServlet">
+<form action="/UserCartServlet">
     <table width="100%">
         <tr align="center">
             <td><h2>Корзина пользователя ${name} </h2></td>
@@ -31,7 +31,7 @@
             <td bgcolor="#fff8dc"><h2>Цена</h2></td>
             <td bgcolor="#fff8dc"><h2>Удалить</h2></td>
         </tr>
-        <c:forEach var="item" items="${userBin}">
+        <c:forEach var="item" items="${cart.items}">
             <tr align="center">
                 <td align="center">${item.name}</td>
                 <td align="center">${item.price} &#8381</td>
@@ -42,9 +42,9 @@
         </c:forEach>
         <tr align="center">
             <td bgcolor="#fff8dc"><h3>Количество товаров: ${counter}</h3></td>
-            <td bgcolor="#fff8dc"><h3>Общая стоимость: ${binPrice} &#8381</h3></td>
+            <td bgcolor="#fff8dc"><h3>Общая стоимость: ${cartPrice} &#8381</h3></td>
             <td bgcolor="#556b2f">
-                <button value="bin" name="bin">Оплатить</button>
+                <button value="cart" name="cart">Оплатить</button>
             </td>
 
 

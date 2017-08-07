@@ -3,12 +3,12 @@ package entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Bin {
+public class UserCart {
     private List<Item> items = new ArrayList<>();
     private int counter = 0;
     private Double price = 0D;
 
-    public Bin() {
+    public UserCart() {
     }
 
     public List<Item> getItems() {

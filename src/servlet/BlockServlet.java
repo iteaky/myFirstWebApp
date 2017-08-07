@@ -1,6 +1,5 @@
 package servlet;
 
-import entity.Bin;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
